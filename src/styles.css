@@ -319,6 +319,11 @@ header .login {
   width: 15rem;
 }
 
+.response-success {
+  margin-top: 1rem;
+  color: #00b1ac;
+}
+
 
 /* Sign in Form */
 .form-signin {
