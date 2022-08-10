@@ -286,14 +286,37 @@ header .login {
 
 .sidebar-header {
   display: flex;
-  justify-content: space-around;
-  align-items: center;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 2rem;
 }
 
 .sidebar-header > h3 {
   font-size: 1.5rem;
   font-weight: 300;
   margin-bottom: 0;
+}
+
+.sidebar .button {
+  margin-top: 1.25rem;
+}
+
+.sidebar-form {
+  display: flex;
+  flex-direction: column;
+  padding: 0.3rem;
+  gap: 0.1rem;
+}
+
+.sidebar-form > label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.sidebar-form input {
+  width: 15rem;
 }
 
 
