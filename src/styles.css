@@ -4,6 +4,14 @@ body {
     font-family: "Gothic A1", sans-serif;
 }
 
+h1, h2, h3, h4 {
+  font-weight: 100;
+}
+
+p {
+  font-weight: 200;
+}
+
 html {
     height: 100%;
 }
@@ -218,6 +226,8 @@ html {
 
 /* Header */
 header {
+  background-color:black;
+  color: white;
   height: 100%;
   display: flex;
   justify-content: space-between;
@@ -226,14 +236,23 @@ header {
   -webkit-box-shadow: 2px 3px 9px -3px rgba(0,0,0,0.75);
   -moz-box-shadow: 2px 3px 9px -3px rgba(0,0,0,0.75);
   padding: 1rem 3rem;
+  font-weight: 200;
 }
 
-header .login{
+header h2 {
+  font-weight: 100;
+}
+
+header .login {
   margin-right: 2rem;
   display: flex;
   gap: 2rem;
 }
 
+.text-link {
+  color: white;
+  text-decoration: inherit;
+}
 
 /* Editor */
 .editor {
@@ -242,7 +261,11 @@ header .login{
 }
 
 .editor h1 {
-  font-weight: 700;
+  font-weight: 300;
+}
+
+.editor h3 {
+  font-weight: 200;
 }
 
 .editor .result .result-img{
@@ -268,7 +291,8 @@ header .login{
 }
 
 .sidebar-header > h3 {
-  font-size: 2rem;
+  font-size: 1.5rem;
+  font-weight: 300;
   margin-bottom: 0;
 }
 
