@@ -329,6 +329,7 @@ header .login {
 
 .response-success {
   margin-top: 1rem;
+  margin-bottom: 0;
   color: #00b1ac;
 }
 

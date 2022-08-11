@@ -24,6 +24,7 @@ function Dataset() {
   });
 
   const [fileUpload, setFileUpload] = useState(false);
+  const [file, setFile] = useState();
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -33,30 +34,8 @@ function Dataset() {
   }
 
   function handleFile(event) {
-    const file = event.target.files[0];
-    // Define specific header
-    const headers = {
-      Authorization: `Bearer ${token}`,
-      "Content-Type": file.type,
-    };
-
-    const dataset_id = 2;
-
-    const formData = new FormData();
-    formData.append("file", file);
-
-    axios
-      .post(`http://localhost:8080/datasets/${dataset_id}/upload`, formData, {
-        headers,
-      })
-      .then((res) => {
-        if (res.status === 200) {
-          setFileUpload(true);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    const newFile = event.target.files[0];
+    setFile(newFile);
   }
 
   function handleSubmit(event) {
@@ -67,16 +46,28 @@ function Dataset() {
       .then((res) => {
         if (res.status === 200) {
           const dataset_id = res.data.id;
+          // Define specific header
+          const headers = {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": file.type,
+          };
+
+          const formData = new FormData();
+          formData.append("file", file);
+
           axios
             .post(
               `http://localhost:8080/datasets/${dataset_id}/upload`,
-              fileUpload,
+              formData,
               {
                 headers,
               }
             )
             .then((res) => {
-              setSuccess(true);
+              if (res.status === 200) {
+                setFileUpload(true);
+                setSuccess(true);
+              }
             })
             .catch((err) => {
               console.log(err);
