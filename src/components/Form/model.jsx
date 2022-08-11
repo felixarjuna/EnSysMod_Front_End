@@ -1,7 +1,12 @@
-import React from "react";
+import axios from "axios";
+import React, { useContext } from "react";
+import { useEffect } from "react";
 import { useState } from "react";
+import { UserContext } from "../Context/UserContext";
 
 function Model() {
+  const { token, datasetID } = useContext(UserContext);
+
   const [model, setModel] = useState({
     name: "",
     description: "",
@@ -9,14 +14,60 @@ function Model() {
     parameters: [],
   });
 
+  const [createModel, setCreateModel] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
+
+  useEffect(() => {
+    setModel((prevValue) => {
+      return { ...prevValue, ref_dataset: datasetID };
+    });
+  }, [datasetID]);
+
   function handleChange(event) {
     const { name, value } = event.target;
     setModel((prevValue) => {
       return { ...prevValue, [name]: value };
     });
   }
+
+  const headers = {
+    Authorization: `Bearer ${token}`,
+    "Content-Type": "application/json",
+  };
+
+  console.log(model);
+  function handleSubmit(event) {
+    event.preventDefault();
+
+    axios
+      .post("http://localhost:8080/models/", model, { headers })
+      .then((res) => {
+        if (res.status === 200) {
+          setCreateModel(true);
+        }
+      })
+      .catch((err) => {
+        if (err.response.status === 422) {
+          console.log(err);
+          const errMsg = JSON.parse(err.request.responseText).detail[0].msg;
+          setErrorMsg(errMsg);
+        }
+        if (err.response.status === 409) {
+          const errMsg = err.response.data.detail;
+          setErrorMsg(errMsg);
+        }
+        if (err.response.status === 403) {
+          console.log(err);
+          const errMsg =
+            err.response.data.detail + "\nPlease sign up or log in";
+          setErrorMsg(errMsg);
+        }
+        setCreateModel(false);
+      });
+  }
+
   return (
-    <form className="sidebar-form" action="">
+    <form className="sidebar-form" onSubmit={handleSubmit}>
       <label htmlFor="">
         Name
         <input
@@ -48,6 +99,11 @@ function Model() {
         />
       </label>
       <button className="button">+</button>
+      {createModel ? (
+        <p className="response-success">Model successfully created!</p>
+      ) : (
+        <p className="response-failed">{errorMsg}</p>
+      )}
     </form>
   );
 }

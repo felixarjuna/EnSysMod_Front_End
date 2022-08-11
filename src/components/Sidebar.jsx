@@ -1,6 +1,6 @@
 import React from "react";
-import Dataset from "./Form/dataset";
-import Model from "./Form/model";
+import Dataset from "./Form/Dataset";
+import Model from "./Form/Model";
 
 function Sidebar() {
   return (

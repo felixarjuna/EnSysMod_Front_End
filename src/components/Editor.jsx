@@ -11,9 +11,8 @@ function Editor() {
         <div className="result">
           <div className="result-img">
             <img src="https://picsum.photos/500/400" alt="" />
-            <img src="https://picsum.photos/500/400" alt="" />
           </div>
-          <h2 className="result-header">Optimization Result</h2>
+          <h3 className="result-header">Optimization Result</h3>
         </div>
       </div>
     </section>

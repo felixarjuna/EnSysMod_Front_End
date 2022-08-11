@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useState } from "react";
 import axios from "axios";
+import { UserContext } from "../Context/UserContext";
 
 function Dataset() {
-  const token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NjA4MzgyMjUsInN1YiI6IjEifQ.stHGynNav-VPyW4ykvuQzWFyd83LiMXFyXAe8Cf43sI";
+  const { token, setDatasetID } = useContext(UserContext);
 
   const headers = {
     Authorization: `Bearer ${token}`,
@@ -46,6 +46,7 @@ function Dataset() {
       .then((res) => {
         if (res.status === 200) {
           const dataset_id = res.data.id;
+          setDatasetID(dataset_id);
           // Define specific header
           const headers = {
             Authorization: `Bearer ${token}`,

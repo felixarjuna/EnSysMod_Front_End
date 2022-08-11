@@ -358,6 +358,11 @@ header .login {
   color: #00b1ac;
 }
 
+.response-failed {
+  color: rgba(251, 16, 16, 0.879);
+  margin-top: 1rem;
+  margin-bottom: 0;
+}
 
 /* Sign in Form */
 .form-signin {
