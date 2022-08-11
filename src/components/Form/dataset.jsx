@@ -23,11 +23,40 @@ function Dataset() {
     ref_created_by: 0,
   });
 
+  const [fileUpload, setFileUpload] = useState(false);
+
   function handleChange(event) {
     const { name, value } = event.target;
     setDataset((prevValue) => {
       return { ...prevValue, [name]: value };
     });
+  }
+
+  function handleFile(event) {
+    const file = event.target.files[0];
+    // Define specific header
+    const headers = {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": file.type,
+    };
+
+    const dataset_id = 2;
+
+    const formData = new FormData();
+    formData.append("file", file);
+
+    axios
+      .post(`http://localhost:8080/datasets/${dataset_id}/upload`, formData, {
+        headers,
+      })
+      .then((res) => {
+        if (res.status === 200) {
+          setFileUpload(true);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   function handleSubmit(event) {
@@ -37,7 +66,21 @@ function Dataset() {
       .post("http://localhost:8080/datasets/", dataset, { headers })
       .then((res) => {
         if (res.status === 200) {
-          setSuccess(true);
+          const dataset_id = res.data.id;
+          axios
+            .post(
+              `http://localhost:8080/datasets/${dataset_id}/upload`,
+              fileUpload,
+              {
+                headers,
+              }
+            )
+            .then((res) => {
+              setSuccess(true);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
         }
       })
       .catch((err) => {
@@ -113,8 +156,13 @@ function Dataset() {
       </label>
       <label htmlFor="">
         Upload Zip Archive
-        <input name="upload" onChange={handleChange} type="file" />
+        <input name="upload" onChange={handleFile} type="file" />
       </label>
+      {fileUpload ? (
+        <p className="response-success">Upload dataset succesfull!</p>
+      ) : (
+        ""
+      )}
       <button className="button" type="submit">
         +
       </button>
