@@ -3,6 +3,7 @@ import React, { useContext } from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { UserContext } from "../Context/UserContext";
+import _ from "lodash";
 
 function Model() {
   const { token, datasetID } = useContext(UserContext);
@@ -35,7 +36,6 @@ function Model() {
     "Content-Type": "application/json",
   };
 
-  console.log(model);
   function handleSubmit(event) {
     event.preventDefault();
 
@@ -49,7 +49,9 @@ function Model() {
       .catch((err) => {
         if (err.response.status === 422) {
           console.log(err);
-          const errMsg = JSON.parse(err.request.responseText).detail[0].msg;
+          const errMsg = _.capitalize(
+            JSON.parse(err.request.responseText).detail[0].msg
+          );
           setErrorMsg(errMsg);
         }
         if (err.response.status === 409) {
@@ -69,7 +71,9 @@ function Model() {
   return (
     <form className="sidebar-form" onSubmit={handleSubmit}>
       <label htmlFor="">
-        Name
+        <div>
+          Name<span className="required"> *</span>
+        </div>
         <input
           name="name"
           onChange={handleChange}
@@ -89,7 +93,9 @@ function Model() {
         />
       </label>
       <label htmlFor="">
-        Dataset reference id
+        <div>
+          Dataset reference id<span className="required"> *</span>
+        </div>
         <input
           name="ref_dataset"
           onChange={handleChange}

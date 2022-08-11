@@ -92,8 +92,11 @@ function Dataset() {
 
   return (
     <form className="sidebar-form" onSubmit={handleSubmit}>
+      <span className="required">* This field is required</span>
       <label htmlFor="name">
-        Name
+        <div>
+          Name<span className="required"> *</span>
+        </div>
         <input
           name="name"
           onChange={handleChange}
@@ -113,7 +116,9 @@ function Dataset() {
         />
       </label>
       <label htmlFor="hours_per_time_step">
-        Hours per time step
+        <div>
+          Hours per time step<span className="required"> *</span>
+        </div>
         <input
           name="hours_per_time_step"
           onChange={handleChange}
@@ -122,7 +127,9 @@ function Dataset() {
         />
       </label>
       <label htmlFor="number_of_time_step">
-        Number of time step
+        <div>
+          Number of time step<span className="required"> *</span>
+        </div>
         <input
           name="number_of_time_step"
           onChange={handleChange}
@@ -131,7 +138,9 @@ function Dataset() {
         />
       </label>
       <label htmlFor="">
-        Cost unit
+        <div>
+          Cost unit<span className="required"> *</span>
+        </div>
         <input
           name="cost_unit"
           onChange={handleChange}
@@ -140,7 +149,9 @@ function Dataset() {
         />
       </label>
       <label htmlFor="length_unit">
-        Length unit
+        <div>
+          Length unit<span className="required"> *</span>
+        </div>
         <input
           name="length_unit"
           onChange={handleChange}

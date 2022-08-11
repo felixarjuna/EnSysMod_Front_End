@@ -327,7 +327,8 @@ header .login {
 .sidebar-header h3 {
   text-align: center;
   font-size: 1.5rem;
-  margin-bottom: 0;
+  margin-top: 1rem;
+  margin-bottom: 0.2rem;
   font-weight: 300;
 }
 
@@ -363,6 +364,19 @@ header .login {
   margin-top: 1rem;
   margin-bottom: 0;
 }
+
+.btn-optimize {
+  color:rgba(255, 255, 255, 1);
+  background-color: #2d3333;
+  margin: 1rem auto;
+  text-align: center;
+  font-weight: 200;
+  padding: 0.6rem 0.4rem;
+  width: 60%;
+  border-radius: 0.2rem;
+  border: none;
+}
+
 
 /* Sign in Form */
 .form-signin {
@@ -420,6 +434,12 @@ header .login {
 
 .signup-container{
   margin-top: 6rem;
+}
+
+.required {
+  color:rgba(251, 16, 16, 0.879);
+  font-weight: 100;
+  font-size: 0.9rem;
 }
 
 /* Success page */

@@ -1,6 +1,7 @@
 import React from "react";
 import Dataset from "./Form/Dataset";
 import Model from "./Form/Model";
+import OptimizeModel from "./Form/OptimizeModel";
 
 function Sidebar() {
   return (
@@ -13,6 +14,8 @@ function Sidebar() {
         <div className="model">
           <h3>New Model</h3>
           <Model />
+          <h3>Optimize Model</h3>
+          <OptimizeModel />
         </div>
       </div>
     </section>
