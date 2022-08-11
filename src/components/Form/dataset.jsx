@@ -92,7 +92,6 @@ function Dataset() {
 
   return (
     <form className="sidebar-form" onSubmit={handleSubmit}>
-      <span className="required">* This field is required</span>
       <label htmlFor="name">
         <div>
           Name<span className="required"> *</span>

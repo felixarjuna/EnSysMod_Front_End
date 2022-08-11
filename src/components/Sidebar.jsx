@@ -8,6 +8,7 @@ function Sidebar() {
     <section className="pane sidebar">
       <div className="sidebar-header">
         <div className="dataset">
+          <span className="required">* This field is required</span>
           <h3>New Dataset</h3>
           <Dataset />
         </div>

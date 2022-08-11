@@ -61,6 +61,7 @@ function OptimizeModel() {
         <input
           type="text"
           name="model_id"
+          autoComplete="off"
           onChange={handleChange}
           value={optimizeText.model_id}
           required
@@ -75,6 +76,7 @@ function OptimizeModel() {
           name="output"
           onChange={handleChange}
           value={optimizeText.output}
+          autoComplete="off"
           required
           placeholder="Excel or JSON"
         />
