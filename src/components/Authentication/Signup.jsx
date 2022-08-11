@@ -53,7 +53,7 @@ function Signup() {
         <div className="text-center signup-container">
           <form onSubmit={handleSubmit} className="form-signin">
             <img className="mb-4" src={Logo} alt="" width="60" />
-            <h1 className="h3 mb-3 font-weight-normal">Sign Up</h1>
+            <h1 className="h3 mb-3">Sign Up</h1>
             <input
               name="username"
               type="username"
@@ -80,13 +80,15 @@ function Signup() {
                 <input type="checkbox" value="remember-me" /> Remember me
               </label>
             </div>
-            <div>
-              <button className="btn btn-primary" type="submit">
+            <div className="submit-area">
+              <button className="btn btn-primary" id="submit-btn" type="submit">
                 Submit
               </button>
               <span className="spacy"> or </span>
               <span>
-                <Link to="/login">Log In</Link>
+                <Link className="text-link-dark" to="/login">
+                  Log In
+                </Link>
               </span>
             </div>
             <p className="mt-5 mb-3 text-muted">&copy;2022 Nowum Institut</p>

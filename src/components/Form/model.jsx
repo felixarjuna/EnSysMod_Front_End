@@ -24,6 +24,7 @@ function Model() {
           onChange={handleChange}
           value={model.name}
           type="text"
+          autoComplete="off"
         />
       </label>
       <label htmlFor="">
@@ -33,6 +34,7 @@ function Model() {
           onChange={handleChange}
           value={model.description}
           type="text"
+          autoComplete="off"
         />
       </label>
       <label htmlFor="">
@@ -42,6 +44,7 @@ function Model() {
           onChange={handleChange}
           value={model.ref_dataset}
           type="text"
+          autoComplete="off"
         />
       </label>
       <button className="button">+</button>

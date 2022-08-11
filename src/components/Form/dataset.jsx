@@ -98,6 +98,7 @@ function Dataset() {
           onChange={handleChange}
           value={dataset.name}
           type="text"
+          autoComplete="off"
         />
       </label>
       <label htmlFor="description">
@@ -107,6 +108,7 @@ function Dataset() {
           onChange={handleChange}
           value={dataset.description}
           type="text"
+          autoComplete="off"
         />
       </label>
       <label htmlFor="hours_per_time_step">

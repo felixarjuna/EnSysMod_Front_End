@@ -60,7 +60,7 @@ function Login() {
         <div className="text-center signup-container">
           <form action="" className="form-signin">
             <img className="mb-4" src={Logo} alt="" width="60" />
-            <h1 className="h3 mb-3 font-weight-normal">Log In</h1>
+            <h1 className="h3 mb-3">Log In</h1>
             <input
               name="username"
               type="username"
@@ -87,9 +87,10 @@ function Login() {
                 <input type="checkbox" value="remember-me" /> Remember me
               </label>
             </div>
-            <div>
+            <div className="submit-area">
               <button
                 className="btn btn-primary"
+                id="submit-btn"
                 type="submit"
                 onClick={handleClick}
               >
@@ -97,7 +98,9 @@ function Login() {
               </button>
               <span className="spacy"> or </span>
               <span>
-                <Link to="/signup">Sign Up</Link>
+                <Link className="text-link-dark" to="/signup">
+                  Sign Up
+                </Link>
               </span>
             </div>
             <p className="mt-5 mb-3 text-muted">&copy;2022 Nowum Institut</p>

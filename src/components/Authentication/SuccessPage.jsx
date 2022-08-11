@@ -10,7 +10,9 @@ function SuccessPage(props) {
       </h1>
       <br />
       <p>
-        <Link to="/webapp">Home</Link>
+        <Link className="text-link-dark" to="/webapp">
+          Home
+        </Link>
       </p>
     </div>
   );

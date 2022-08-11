@@ -9,7 +9,7 @@ h1, h2, h3, h4 {
   font-weight: 100;
 }
 
-p {
+p, input {
   font-weight: 200;
 }
 
@@ -262,6 +262,30 @@ header .login {
   box-sizing: border-box;
 }
 
+.text-link-dark {
+  color: #00b1ac;
+  text-decoration: inherit;
+}
+
+.submit-area {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+#submit-btn {
+  background-color: black;
+  padding: 0.5rem 0.8rem;
+  color:white;
+  border: none;
+  font-weight: 200;
+}
+
+#submit-btn:hover {
+  background-color: #2d3333;
+}
+
 /* Editor */
 .editor {
   min-height: 100vh;
@@ -300,10 +324,11 @@ header .login {
   gap: 2rem;
 }
 
-.sidebar-header > h3 {
+.sidebar-header h3 {
+  text-align: center;
   font-size: 1.5rem;
-  font-weight: 300;
   margin-bottom: 0;
+  font-weight: 300;
 }
 
 .sidebar .button {
@@ -340,6 +365,11 @@ header .login {
   max-width: 330px;
   padding: 15px;
   margin: 0 auto;
+  font-weight: 200;
+}
+
+.form-signin .h3, .form-signin input, label {
+  font-weight: 200;
 }
 
 .form-signin .checkbox {
@@ -388,10 +418,14 @@ header .login {
 }
 
 /* Success page */
-.success-page{
+.success-page {
   height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.success-page, .success-page h1 {
+  font-weight: 200;
 }
