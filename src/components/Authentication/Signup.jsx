@@ -1,10 +1,11 @@
-import React, { useState } from "react";
-import Logo from "../assets/fhaachenlogo.png";
+import React from "react";
+import Logo from "../../assets/fhaachenlogo.png";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import SuccessPage from "./Authentication/SuccessPage";
+import { useState } from "react";
+import SuccessPage from "./SuccessPage";
 
-function Login() {
+function Signup() {
   const [user, setUser] = useState({
     username: "",
     password: "",
@@ -15,57 +16,52 @@ function Login() {
   function handleChange(event) {
     const { name, value } = event.target;
     setUser((prevValue) => {
-      return {
-        ...prevValue,
-        [name]: value,
-      };
+      return { ...prevValue, [name]: value };
     });
   }
 
-  function handleClick(event) {
+  function handleSubmit(event) {
     event.preventDefault();
 
     const token = "";
 
     const headers = {
       Authorization: `Bearer ${token}`,
-      "Content-Type": "application/x-www-form-urlencoded",
+      "Content-Type": "application/json",
     };
 
-    const data = `username=${user.username}&password=${user.password}`;
     axios
-      .post("http://localhost:8080/auth/login", data, {
-        headers,
-      })
+      .post("http://localhost:8080/auth/register", user, { headers })
       .then((res) => {
         if (res.status === 200) {
           setSuccess(true);
         }
       })
-      .catch((err) => {
-        if (err.response.status === 401) {
-          alert(err.response.statusText);
-        }
-      });
+      .catch((err) => console.log(err));
+
+    setUser({
+      username: "",
+      password: "",
+    });
   }
 
   return (
     <>
       {success ? (
-        <SuccessPage params={"login"} />
+        <SuccessPage params={"signup"} />
       ) : (
         <div className="text-center signup-container">
-          <form action="" className="form-signin">
+          <form onSubmit={handleSubmit} className="form-signin">
             <img className="mb-4" src={Logo} alt="" width="60" />
-            <h1 className="h3 mb-3 font-weight-normal">Log In</h1>
+            <h1 className="h3 mb-3 font-weight-normal">Sign Up</h1>
             <input
               name="username"
               type="username"
               id="inputUsername"
               className="form-control top"
               placeholder="Username"
-              value={user.username}
               onChange={handleChange}
+              value={user.username}
               required
               autoFocus
             />
@@ -75,9 +71,9 @@ function Login() {
               id="inputPassword"
               className="form-control bottom"
               placeholder="Password"
-              value={user.password}
-              onChange={handleChange}
               required
+              onChange={handleChange}
+              value={user.password}
             />
             <div className="checkbox mb-3">
               <label>
@@ -85,16 +81,12 @@ function Login() {
               </label>
             </div>
             <div>
-              <button
-                className="btn btn-primary"
-                type="submit"
-                onClick={handleClick}
-              >
+              <button className="btn btn-primary" type="submit">
                 Submit
               </button>
               <span className="spacy"> or </span>
               <span>
-                <Link to="/signup">Sign Up</Link>
+                <Link to="/login">Log In</Link>
               </span>
             </div>
             <p className="mt-5 mb-3 text-muted">&copy;2022 Nowum Institut</p>
@@ -105,4 +97,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default Signup;
