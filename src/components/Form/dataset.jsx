@@ -46,55 +46,62 @@ function Dataset() {
   function handleSubmit(event) {
     event.preventDefault();
     setLoading(true);
+
     axios
       .post("http://localhost:8080/datasets/", dataset, { headers })
       .then((res) => {
         if (res.status === 200) {
           const dataset_id = res.data.id;
           setDatasetID(dataset_id);
-          // Define specific header
-          const headers = {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": file.type,
-          };
 
-          const formData = new FormData();
-          formData.append("file", file);
+          // Check if any file uploaded
+          if (file === undefined) {
+            setSuccess(true);
+            setLoading(false);
+          } else {
+            // Define specific header
+            const headers = {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": file?.type,
+            };
+            const formData = new FormData();
+            formData.append("file", file);
 
-          axios
-            .post(
-              `http://localhost:8080/datasets/${dataset_id}/upload`,
-              formData,
-              {
-                headers,
-              }
-            )
-            .then((res) => {
-              if (res.status === 200) {
-                setFileUpload(true);
-                setSuccess(true);
-                setLoading(false);
-              }
-            })
-            .catch((err) => {
-              if (err.response.status === 422) {
-                console.log(err);
-                const errMsg = _.capitalize(
-                  JSON.parse(err.request.responseText).detail[0].msg
-                );
-                setErrorMsg(errMsg);
-              }
-              if (err.response.status === 409) {
-                const errMsg = err.response.data.detail;
-                setErrorMsg(errMsg);
-              }
-              if (err.response.status === 403) {
-                console.log(err);
-                const errMsg =
-                  err.response.data.detail + "\nPlease sign up or log in";
-                setErrorMsg(errMsg);
-              }
-            });
+            axios
+              .post(
+                `http://localhost:8080/datasets/${dataset_id}/upload`,
+                formData,
+                {
+                  headers,
+                }
+              )
+              .then((res) => {
+                if (res.status === 200) {
+                  setFileUpload(true);
+                  setSuccess(true);
+                  setLoading(false);
+                }
+              })
+              .catch((err) => {
+                if (err.response.status === 422) {
+                  console.log(err);
+                  const errMsg = _.capitalize(
+                    JSON.parse(err.request.responseText).detail[0].msg
+                  );
+                  setErrorMsg(errMsg);
+                }
+                if (err.response.status === 409) {
+                  const errMsg = err.response.data.detail;
+                  setErrorMsg(errMsg);
+                }
+                if (err.response.status === 403) {
+                  console.log(err);
+                  const errMsg =
+                    err.response.data.detail + "\nPlease sign up or log in";
+                  setErrorMsg(errMsg);
+                }
+              });
+          }
         }
       })
       .catch((err) => {
