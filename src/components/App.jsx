@@ -16,7 +16,6 @@ function App() {
   const [token, setToken] = useState("");
   const [datasetID, setDatasetID] = useState();
 
-  console.log(datasetID);
   return (
     <Router>
       <Routes>
