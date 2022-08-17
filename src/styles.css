@@ -300,11 +300,6 @@ header .login {
   font-weight: 200;
 }
 
-.editor .result .result-img{
-  display: flex;
-  gap: 1rem;
-}
-
 .result-header {
   margin-top: 2rem;
 }
