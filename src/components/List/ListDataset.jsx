@@ -30,7 +30,9 @@ function ListDataset() {
   };
 
   useEffect(() => {
-    getDataset();
+    setTimeout(() => {
+      getDataset();
+    }, 2000);
   }, [datasetID]);
 
   function getDataset() {

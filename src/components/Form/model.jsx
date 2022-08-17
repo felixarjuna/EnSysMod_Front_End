@@ -98,7 +98,6 @@ function Model() {
         </div>
         <input
           name="ref_dataset"
-          onChange={handleChange}
           value={model.ref_dataset}
           type="text"
           autoComplete="off"
