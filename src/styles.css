@@ -311,7 +311,7 @@ header .login {
 
 /* Sidebar */
 .sidebar{
-  width: 20%;
+  width: 25%;
   height: 100vh;
   padding: 2rem;
 }
@@ -321,7 +321,6 @@ header .login {
   justify-content: center;
   align-items: flex-start;
   flex-direction: column;
-  gap: 2rem;
 }
 
 .sidebar-header h3 {
@@ -341,6 +340,7 @@ header .login {
   flex-direction: column;
   padding: 0.3rem;
   gap: 0.1rem;
+  max-width: 20rem;
 }
 
 .sidebar-form > label {
@@ -375,6 +375,10 @@ header .login {
   width: 60%;
   border-radius: 0.2rem;
   border: none;
+}
+
+.loader {
+  margin: 1rem auto 0rem;
 }
 
 

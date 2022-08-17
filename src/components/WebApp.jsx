@@ -9,7 +9,7 @@ function WebApp() {
     <div>
       <Header />
       <main className="main-container">
-        <Split sizes={[20, 80]} direction="horizontal" className="split">
+        <Split sizes={[25, 70]} direction="horizontal" className="split">
           <Sidebar />
           <Editor />
         </Split>

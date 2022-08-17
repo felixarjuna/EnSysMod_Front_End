@@ -104,7 +104,7 @@ function Model() {
           autoComplete="off"
         />
       </label>
-      <button className="button">+</button>
+      <button className="button btn-optimize">+</button>
       {createModel ? (
         <p className="response-success">Model successfully created!</p>
       ) : (

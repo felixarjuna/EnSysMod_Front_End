@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import axios from "axios";
 import _ from "lodash";
 import { UserContext } from "../Context/UserContext";
+import ClipLoader from "react-spinners/ClipLoader";
 
 function OptimizeModel() {
   const [optimizeText, setOptimizeText] = useState({
@@ -11,6 +12,7 @@ function OptimizeModel() {
 
   const [optimization, setOptimization] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const { token } = useContext(UserContext);
 
@@ -24,6 +26,7 @@ function OptimizeModel() {
 
   function handleSubmit(event) {
     event.preventDefault();
+    setLoading(true);
 
     const id = parseInt(optimizeText.model_id);
     const output = _.toLower(optimizeText.output);
@@ -41,6 +44,7 @@ function OptimizeModel() {
         if (res.status === 200) {
           console.log(res);
           setOptimization(true);
+          setLoading(false);
         }
       })
       .catch((err) => {
@@ -83,6 +87,14 @@ function OptimizeModel() {
         <button className="btn-optimize button" type="submit">
           Optimize Model
         </button>
+        {loading && (
+          <ClipLoader
+            className="loader"
+            color="rgba(46, 177, 163, 1)"
+            loading={loading}
+            size={35}
+          />
+        )}
         {optimization ? (
           <p className="response-success">Optimization successfull!</p>
         ) : (

@@ -2,6 +2,8 @@ import React, { useContext } from "react";
 import { useState } from "react";
 import axios from "axios";
 import { UserContext } from "../Context/UserContext";
+import ClipLoader from "react-spinners/ClipLoader";
+import _ from "lodash";
 
 function Dataset() {
   const { token, setDatasetID } = useContext(UserContext);
@@ -12,6 +14,7 @@ function Dataset() {
   };
 
   const [success, setSuccess] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
 
   const [dataset, setDataset] = useState({
     name: "",
@@ -38,9 +41,11 @@ function Dataset() {
     setFile(newFile);
   }
 
+  const [loading, setLoading] = useState(false);
+
   function handleSubmit(event) {
     event.preventDefault();
-
+    setLoading(true);
     axios
       .post("http://localhost:8080/datasets/", dataset, { headers })
       .then((res) => {
@@ -68,15 +73,48 @@ function Dataset() {
               if (res.status === 200) {
                 setFileUpload(true);
                 setSuccess(true);
+                setLoading(false);
               }
             })
             .catch((err) => {
-              console.log(err);
+              if (err.response.status === 422) {
+                console.log(err);
+                const errMsg = _.capitalize(
+                  JSON.parse(err.request.responseText).detail[0].msg
+                );
+                setErrorMsg(errMsg);
+              }
+              if (err.response.status === 409) {
+                const errMsg = err.response.data.detail;
+                setErrorMsg(errMsg);
+              }
+              if (err.response.status === 403) {
+                console.log(err);
+                const errMsg =
+                  err.response.data.detail + "\nPlease sign up or log in";
+                setErrorMsg(errMsg);
+              }
             });
         }
       })
       .catch((err) => {
-        console.log(err);
+        if (err.response.status === 422) {
+          console.log(err);
+          const errMsg = _.capitalize(
+            JSON.parse(err.request.responseText).detail[0].msg
+          );
+          setErrorMsg(errMsg);
+        }
+        if (err.response.status === 409) {
+          const errMsg = err.response.data.detail;
+          setErrorMsg(errMsg);
+        }
+        if (err.response.status === 403) {
+          console.log(err);
+          const errMsg =
+            err.response.data.detail + "\nPlease sign up or log in";
+          setErrorMsg(errMsg);
+        }
       });
 
     setDataset({
@@ -167,13 +205,21 @@ function Dataset() {
       ) : (
         ""
       )}
-      <button className="button" type="submit">
+      <button className="button btn-optimize" type="submit">
         +
       </button>
+      {loading && (
+        <ClipLoader
+          className="loader"
+          color="rgba(46, 177, 163, 1)"
+          loading={loading}
+          size={35}
+        />
+      )}
       {success ? (
         <p className="response-success">Dataset successfully created!</p>
       ) : (
-        ""
+        <p className="response-failed">{errorMsg}</p>
       )}
     </form>
   );
