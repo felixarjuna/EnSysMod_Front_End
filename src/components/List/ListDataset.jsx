@@ -24,29 +24,28 @@ function ListDataset() {
   const { token, datasetID } = useContext(UserContext);
   const [dataset, setDataset] = useState([]);
 
-  const headers = {
-    Authorization: `Bearer ${token}`,
-    "Content-Type": "application/json",
-  };
-
   useEffect(() => {
+    const headers = {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    };
+
+    function getDataset() {
+      axios
+        .get("http://localhost:8080/datasets/", { headers })
+        .then((res) => {
+          setDataset((prevValue) => {
+            return [...prevValue, res.data];
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
     setTimeout(() => {
       getDataset();
-    }, 2000);
+    }, 5000);
   }, [datasetID]);
-
-  function getDataset() {
-    axios
-      .get("http://localhost:8080/datasets/", { headers })
-      .then((res) => {
-        setDataset((prevValue) => {
-          return [...prevValue, res.data];
-        });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
 
   return (
     <div className="sidebar-list">
