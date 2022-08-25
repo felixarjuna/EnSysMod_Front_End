@@ -34,18 +34,17 @@ function ListDataset() {
       axios
         .get("http://localhost:8080/datasets/", { headers })
         .then((res) => {
-          setDataset((prevValue) => {
-            return [...prevValue, res.data];
+          setDataset(() => {
+            return [res.data];
           });
         })
         .catch((err) => {
           console.log(err);
         });
     }
-    setTimeout(() => {
-      getDataset();
-    }, 5000);
-  }, [datasetID]);
+
+    getDataset();
+  }, [datasetID, token]);
 
   return (
     <div className="sidebar-list">

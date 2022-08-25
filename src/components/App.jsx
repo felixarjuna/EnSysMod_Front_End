@@ -15,6 +15,7 @@ import { UserContext } from "./Context/UserContext";
 function App() {
   const [token, setToken] = useState("");
   const [datasetID, setDatasetID] = useState();
+  const [modelID, setModelID] = useState();
 
   return (
     <Router>
@@ -22,7 +23,14 @@ function App() {
         <Route path="/" element={<Homepage />} />
       </Routes>
       <UserContext.Provider
-        value={{ token, setToken, datasetID, setDatasetID }}
+        value={{
+          token,
+          setToken,
+          datasetID,
+          setDatasetID,
+          modelID,
+          setModelID,
+        }}
       >
         <Routes>
           <Route path="/webapp" element={<WebApp />} />

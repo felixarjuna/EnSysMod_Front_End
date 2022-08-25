@@ -105,6 +105,8 @@ function Dataset() {
         }
       })
       .catch((err) => {
+        setSuccess(false);
+        setLoading(false);
         if (err.response.status === 422) {
           console.log(err);
           const errMsg = _.capitalize(

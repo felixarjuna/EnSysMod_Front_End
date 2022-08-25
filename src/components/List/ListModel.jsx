@@ -21,37 +21,36 @@ function ModelItem(props) {
 }
 
 function ListModel() {
-  const { token, datasetID } = useContext(UserContext);
-  const [dataset, setDataset] = useState([]);
-
-  const headers = {
-    Authorization: `Bearer ${token}`,
-    "Content-Type": "application/json",
-  };
+  const { token, modelID } = useContext(UserContext);
+  const [models, setModels] = useState([]);
 
   useEffect(() => {
-    getDataset();
-  }, [datasetID]);
-
-  function getDataset() {
-    axios
-      .get("http://localhost:8080/models/", { headers })
-      .then((res) => {
-        setDataset((prevValue) => {
-          return [...prevValue, res.data];
+    const headers = {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    };
+    function getModel() {
+      axios
+        .get("http://localhost:8080/models/", { headers })
+        .then((res) => {
+          setModels(() => {
+            return [res.data];
+          });
+        })
+        .catch((err) => {
+          console.log(err);
         });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
+    }
+
+    getModel();
+  }, [modelID, token]);
 
   return (
     <div className="sidebar-list">
       <Collapsible trigger="Models">
         <ul>
-          {dataset[0]?.map((data) => (
-            <ModelItem name={data.name} id={data.id} key={data.id}/>
+          {models[0]?.map((data) => (
+            <ModelItem name={data.name} id={data.id} key={data.id} />
           ))}
         </ul>
       </Collapsible>

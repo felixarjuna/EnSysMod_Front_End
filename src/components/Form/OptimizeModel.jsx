@@ -5,16 +5,15 @@ import { UserContext } from "../Context/UserContext";
 import ClipLoader from "react-spinners/ClipLoader";
 
 function OptimizeModel() {
+  const { token, modelID } = useContext(UserContext);
   const [optimizeText, setOptimizeText] = useState({
-    model_id: "",
+    model_id: modelID,
     output: "",
   });
 
   const [optimization, setOptimization] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
   const [loading, setLoading] = useState(false);
-
-  const { token } = useContext(UserContext);
 
   function handleChange(event) {
     const { name, value } = event.target;

@@ -6,7 +6,7 @@ import { UserContext } from "../Context/UserContext";
 import _ from "lodash";
 
 function Model() {
-  const { token, datasetID } = useContext(UserContext);
+  const { token, datasetID, setModelID } = useContext(UserContext);
 
   const [model, setModel] = useState({
     name: "",
@@ -43,6 +43,7 @@ function Model() {
       .post("http://localhost:8080/models/", model, { headers })
       .then((res) => {
         if (res.status === 200) {
+          setModelID(res.data.id);
           setCreateModel(true);
         }
       })
